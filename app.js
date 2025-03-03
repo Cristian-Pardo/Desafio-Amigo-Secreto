@@ -22,7 +22,8 @@ function agregarAmigo() {
         
         alert("Por favor, inserte un nombre.");
     }
-
+    limpiarCampo=(document.getElementById("amigo"));
+    limpiarCampo.value="";
     console.log(variableListaAmigos);
 }
 
