@@ -1,12 +1,12 @@
 // El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
 
 //Array. 
-let variableListaAmigos=[];
+let arrayListaAmigos=[];
 
 //comienzo para agregar amigo.
 
     function agregarAmigo() {
-        
+        console.log("");
         console.log("Ingreso a la funcion agregarAmigo");
         let returnValidadorCampo=false;
         let valorIngresadoUsuario="";
@@ -16,25 +16,30 @@ let variableListaAmigos=[];
         returnValidadorCampo=validadorInputNoVacio(valorIngresadoUsuario);
         
         if(returnValidadorCampo){
-            variableListaAmigos.push(valorIngresadoUsuario)
+            arrayListaAmigos.push(valorIngresadoUsuario)
             valorIngresadoUsuario=""
         }
         else {
-            console.log("   No se cumplieron politicas establecidas por lo tanto no se actualiza variableListaAmigos ");
+            console.log("   No se cumplieron politicas establecidas por lo tanto no se actualiza arrayListaAmigos ");
             
             alert("Por favor, inserte un nombre.");
+            console.log("!!!Se quiebra intencionalmente la funcion!!!");
+            return
         }
         limpiarCampo=(document.getElementById("amigo"));
         limpiarCampo.value="";
         // la linea . focus te permite hacer que el cursor de texto aparezca de nuevo en el recuadro del input
         // evita volver a dar clic.
         limpiarCampo.focus();
-        console.log(variableListaAmigos);
+        console.log(arrayListaAmigos);
         recorrerArrayAmigos();
+        console.log("***Se Agrego correctamente el amigo***");
+
     }
 
     //esta funcion valida si esta vacio y devuelve un buleano. 
     function validadorInputNoVacio(datoIngresado) {
+        console.log("");
         console.log("Ingreso a la funcion validadorInputVacio");
         
         let datoConInfo=false
@@ -55,6 +60,7 @@ let variableListaAmigos=[];
 //Comienzo mostrar Amigos
 
     function recorrerArrayAmigos() {
+        console.log("");
         console.log("Ingreso a la funcion recorrerArrayAmigos");
         
         let listaAmigosJS=document.getElementById("listaAmigos");
@@ -62,38 +68,56 @@ let variableListaAmigos=[];
         listaAmigosJS.innerHTML=""
 
 
-        for (let index = 0; index < variableListaAmigos.length; index++) {
+        for (let index = 0; index < arrayListaAmigos.length; index++) {
             let li = document.createElement("li"); // Creamos un elemento <li>
-            li.textContent = variableListaAmigos[index]; // Asignamos el texto del amigo al <li>
-            console.log("En este apartado ingresa cada amigo a ul valor Agregado"+ variableListaAmigos[index]);
+            li.textContent = arrayListaAmigos[index]; // Asignamos el texto del amigo al <li>
             listaAmigosJS.appendChild(li); // Agregamos el <li> dentro del <ul> usamos la variable JS para ello (Asi nos evitamos invocar nuevamente el getElem...)
-            console.log(variableListaAmigos);
         }
-        
-        console.log("Estado actual del resultado: Exitoso");
+        console.log("   Finalizo el bucle donde ingresa cada amigo a ul");
     }
     
 //Fin mostrar Amigos
 
 
+// Inicio Apartado para funcionalidad Sortear Amigos
+    function sortearAmigo(){
+        console.log("");
+        console.log("Ingreso a la funcion sortearAmigo");
+        if (arrayListaAmigos.length===0) {
+            alert("No hay amigos para sortear");
+            console.log("!!!Se quiebra intencionalmente la funcion!!!");
+            return
+        }
+        //declaracion array auxiliar
+        let amigoSorteado=[];
+        amigoSorteado=arrayListaAmigos[(Math.floor(Math.random()*arrayListaAmigos.length))];
+        
+        let resultadoJS=document.getElementById("resultado");
+        resultadoJS.innerHTML=`El amigo Sorteado es ${amigoSorteado}`;
+        
+        let limpiarLista=document.getElementById("listaAmigos");
+        limpiarLista.innerHTML="";
+        restablecerValores()
+    }
+//Fin Apartado para funcionalidad Sortear Amigos
 
-
-
-//Crea una función que recorra el array amigos y agregue cada nombre como un elemento <li> dentro de una lista HTML. 
-// Usa innerHTML para limpiar la lista antes de agregar nuevos elementos.
-
-//Tareas específicas:
-//Obtener el elemento de la lista: Utilizar document.getElementById() o document.querySelector() para seleccionar la lista donde se mostrarán los amigos.
-
-//Limpiar la lista existente: Establecer lista.innerHTML = "" para asegurarse de que no haya duplicados al actualizar.
-
-//Iterar sobre el arreglo: Usa un bucle for para recorrer el arreglo amigos y crear elementos de lista (<li>) para cada título.
-
-//Agregar elementos a la lista: Para cada amigo, crear un nuevo elemento de lista.
-
-
-
-
-function sortearAmigo(){
-    console.log("Ingreso a la funcion sortearAmigo");
-}
+//Para evitar el F5
+    function restablecerValores() {
+        console.log("*** Funcionalidad Completa ***");
+        arrayListaAmigos=[]
+        setTimeout(() => {
+            console.clear();
+            alert("El sistema se ha reiniciado para estar listo, ¿intentamos nuevamente?");
+            setTimeout(() => {
+                console.clear();
+                console.log("*** Funcionalidad Completa ***");
+                console.log(" Se restablecen valores ");
+                setTimeout(() => {
+                    console.clear();
+                }, 3000); 
+            }, 3000); 
+            let resultadoJS=document.getElementById("resultado");
+            resultadoJS.innerHTML="";
+        }, 5000); 
+    }
+// Fin F5
